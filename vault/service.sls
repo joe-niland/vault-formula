@@ -6,6 +6,10 @@ vault-init-script:
     - source: salt://vault/files/vault.upstart
     - name: /etc/init/vault.conf
     - mode: 0644
+    {% elif salt['test.provider']('service') == 'rh_service' %}
+    - source: salt://vault/files/vault.upstart
+    - name: /etc/init/vault.conf
+    - mode: 0644
     {% else %}
     - source: salt://vault/files/vault.sysvinit
     - name: /etc/init.d/vault
